@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: st2dce-proj-prod
+  labels:
+    app: st2dce-proj
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: st2dce-proj
+  template:
+    metadata:
+      labels:
+        app: st2dce-proj
+    spec:
+      containers:
+        - name: st2dce-proj
+          image: st2dce-proj-image:${BUILD_ID}
+          ports:
+            - containerPort: 8080
